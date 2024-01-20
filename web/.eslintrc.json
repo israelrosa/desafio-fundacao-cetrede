@@ -1,19 +1,28 @@
 {
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
   "extends": [
+    "standard-with-typescript",
     "next/core-web-vitals",
     "eslint:recommended", 
     "plugin:react/recommended",
-    "plugin:react-hooks/recommended"
-  ],
-  "plugins": [
-    "react",
-    "react-hooks"
+    "plugin:react-hooks/recommended",
+    "airbnb",
+    "airbnb/hooks",
+    "prettier"
   ],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
-    }
+    },
+    "sourceType": "module"
   },
+  "plugins": [
+    "react",
+    "react-hooks"
+  ],
   "rules": {
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
