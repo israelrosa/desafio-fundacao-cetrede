@@ -8,6 +8,7 @@ import { CustomTypeormModule } from './infrastructure/databases/typeorm/typeorm.
 import { EscolasModule } from './modules/escolas/escolas.module';
 import { SchoolsModule } from './modules/schools/schools.module';
 import { StatesModule } from './modules/states/states.module';
+import { CitiesModule } from './modules/cities/cities.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { StatesModule } from './modules/states/states.module';
     EscolasModule,
     SchoolsModule,
     StatesModule,
+    CitiesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { City } from 'src/modules/cities/entities/city.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity({ name: 'escolas' })
 export class School {
@@ -19,4 +26,8 @@ export class School {
 
   @Column({ name: 'municipio_id', nullable: false })
   city_id: number;
+
+  @ManyToOne(() => City, (city) => city.schools)
+  @JoinColumn({ name: 'municipio_id' })
+  city: City;
 }
