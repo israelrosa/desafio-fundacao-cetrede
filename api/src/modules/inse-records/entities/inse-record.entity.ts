@@ -21,31 +21,31 @@ export class InseRecord {
   @Column({ name: 'classificacao', nullable: false })
   classification: string;
 
-  @Column({ name: 'media', nullable: false })
+  @Column('numeric', { name: 'media', nullable: false })
   average: number;
 
-  @Column({ name: 'pc_nivel_1', nullable: false })
+  @Column('numeric', { name: 'pc_nivel_1', nullable: false })
   percentual_level_1: number;
 
-  @Column({ name: 'pc_nivel_2', nullable: false })
+  @Column('numeric', { name: 'pc_nivel_2', nullable: false })
   percentual_level_2: number;
 
-  @Column({ name: 'pc_nivel_3', nullable: false })
+  @Column('numeric', { name: 'pc_nivel_3', nullable: false })
   percentual_level_3: number;
 
-  @Column({ name: 'pc_nivel_4', nullable: false })
+  @Column('numeric', { name: 'pc_nivel_4', nullable: false })
   percentual_level_4: number;
 
-  @Column({ name: 'pc_nivel_5', nullable: false })
+  @Column('numeric', { name: 'pc_nivel_5', nullable: false })
   percentual_level_5: number;
 
-  @Column({ name: 'pc_nivel_6', nullable: false })
+  @Column('numeric', { name: 'pc_nivel_6', nullable: false })
   percentual_level_6: number;
 
-  @Column({ name: 'pc_nivel_7', nullable: false })
+  @Column('numeric', { name: 'pc_nivel_7', nullable: false })
   percentual_level_7: number;
 
-  @Column({ name: 'pc_nivel_8', nullable: false })
+  @Column('numeric', { name: 'pc_nivel_8', nullable: false })
   percentual_level_8: number;
 
   @Column({ name: 'escola_id', nullable: false })
