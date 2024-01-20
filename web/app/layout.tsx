@@ -1,9 +1,13 @@
-import React from 'react'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
+import React from 'react';
+import { PrimeReactProvider } from 'primereact/api';
+import type { Metadata } from 'next';
+import { Inter } from "next/font/google";
+import './globals.css';
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+import 'primeicons/primeicons.css';
+import AppTopbar from '@/layout/AppTopbar';
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -17,7 +21,10 @@ export default function RootLayout({
 }>): React.ReactNode {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <PrimeReactProvider >     
+        <AppTopbar/>    
+        <body className={inter.className}>{children}</body>
+      </PrimeReactProvider>
     </html>
   )
 }
