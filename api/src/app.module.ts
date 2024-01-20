@@ -9,6 +9,7 @@ import { EscolasModule } from './modules/escolas/escolas.module';
 import { SchoolsModule } from './modules/schools/schools.module';
 import { StatesModule } from './modules/states/states.module';
 import { CitiesModule } from './modules/cities/cities.module';
+import { InseRecordsModule } from './modules/inse-records/inse-records.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { CitiesModule } from './modules/cities/cities.module';
     SchoolsModule,
     StatesModule,
     CitiesModule,
+    InseRecordsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,9 +1,11 @@
 import { City } from 'src/modules/cities/entities/city.entity';
+import { InseRecord } from 'src/modules/inse-records/entities/inse-record.entity';
 import {
   Column,
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -30,4 +32,7 @@ export class School {
   @ManyToOne(() => City, (city) => city.schools)
   @JoinColumn({ name: 'municipio_id' })
   city: City;
+
+  @OneToMany(() => InseRecord, (inse_record) => inse_record.school)
+  inse_records: InseRecord[];
 }
