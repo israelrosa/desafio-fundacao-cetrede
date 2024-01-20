@@ -1,0 +1,17 @@
+version: '3.9'
+
+networks:
+  desafio-cetrede:
+    driver: bridge
+
+services:
+  desafio-cetrede-postgres:
+    image: 'postgres:16.1'
+    ports:
+      - '5444:5432'
+    environment:
+      POSTGRES_USER: 'desafio_cetrede'
+      POSTGRES_PASSWORD: 'desafio_cetrede'
+      POSTGRES_DB: 'inse'
+    networks:
+      - desafio-cetrede
