@@ -5,16 +5,16 @@ export class School {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
-  @Column({ name: 'no_escola', nullable: false })
+  @Column({ name: 'nome', nullable: false })
   name: string;
 
-  @Column({ name: 'tp_capital', nullable: false })
+  @Column({ name: 'tipo_capital', nullable: false })
   capital_type: string;
 
-  @Column({ name: 'tp_localizacao', nullable: false })
+  @Column({ name: 'tipo_localizacao', nullable: false })
   location_type: string;
 
-  @Column({ name: 'tp_tipo_rede', nullable: false })
+  @Column({ name: 'tipo_rede', nullable: false })
   network_type: string;
 
   @Column({ name: 'municipio_id', nullable: false })
