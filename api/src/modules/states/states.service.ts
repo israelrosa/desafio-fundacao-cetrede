@@ -1,26 +1,47 @@
 import { Injectable } from '@nestjs/common';
-import { CreateStateDto } from './dto/create-state.dto';
-import { UpdateStateDto } from './dto/update-state.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { FindAllStatesQueryDto } from './dto/find-all-states-query.dto';
+import { State } from './entities/state.entity';
 
 @Injectable()
 export class StatesService {
-  create(createStateDto: CreateStateDto) {
-    return 'This action adds a new state';
-  }
+  constructor(
+    @InjectRepository(State)
+    private readonly statesRepository: Repository<State>,
+  ) {}
 
-  findAll() {
-    return `This action returns all states`;
-  }
+  async findAll(findAllStatesQueryDto: FindAllStatesQueryDto) {
+    const queryBuilder = this.statesRepository
+      .createQueryBuilder('state')
+      .leftJoin('state.cities', 'city');
 
-  findOne(id: number) {
-    return `This action returns a #${id} state`;
-  }
+    if (findAllStatesQueryDto.search) {
+      queryBuilder.where(
+        'concat(state.nome, state.sigla, city.nome) ILIKE :search',
+        {
+          search: `%${findAllStatesQueryDto.search}%`,
+        },
+      );
+    }
 
-  update(id: number, updateStateDto: UpdateStateDto) {
-    return `This action updates a #${id} state`;
-  }
+    if (findAllStatesQueryDto.city_id) {
+      queryBuilder.andWhere('city.id = :city_id', {
+        city_id: findAllStatesQueryDto.city_id,
+      });
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} state`;
+    if (findAllStatesQueryDto.sorts) {
+      const sorts = findAllStatesQueryDto.sorts.split(',');
+      const sortsAndOrders = sorts.map((item) => item.trim().split(':'));
+      sortsAndOrders.forEach(([column, order]) => {
+        queryBuilder.orderBy(
+          `state.${column}`,
+          order.toUpperCase() as 'ASC' | 'DESC',
+        );
+      });
+    }
+
+    return queryBuilder.getMany();
   }
 }
