@@ -2,14 +2,16 @@ import { School } from 'src/modules/schools/entities/school.entity';
 import {
   Column,
   Entity,
+  Generated,
   JoinColumn,
   ManyToOne,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
 } from 'typeorm';
 
 @Entity({ name: 'inse_registros' })
 export class InseRecord {
-  @PrimaryGeneratedColumn('increment')
+  @PrimaryColumn()
+  @Generated('increment')
   id: number;
 
   @Column({ name: 'ano_saeb', nullable: false })

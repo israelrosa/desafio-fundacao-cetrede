@@ -1,6 +1,7 @@
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { join } from 'path';
+import { Seeder } from '@/shared/providers/seeders/entities/seeder.entity';
 
 export class PostgreSQLDBConfig {
   static createTypeOrmOptions(
@@ -11,7 +12,7 @@ export class PostgreSQLDBConfig {
       ssl: false,
       useUTC: true,
       type: 'postgres',
-      entities: [join(__dirname, '../../../../**/**/**.entity.js')],
+      entities: [join(__dirname, '../../../../**/**/**.entity.js'), Seeder],
       synchronize: true,
       logging: false,
       migrationsRun: true,

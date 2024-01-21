@@ -6,25 +6,25 @@ import {
   JoinColumn,
   ManyToOne,
   OneToMany,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
 } from 'typeorm';
 
 @Entity({ name: 'escolas' })
 export class School {
-  @PrimaryGeneratedColumn('increment')
+  @PrimaryColumn()
   id: number;
 
   @Column({ name: 'nome', nullable: false })
   name: string;
 
   @Column({ name: 'tipo_capital', nullable: false })
-  capital_type: string;
+  capital_type: number;
 
   @Column({ name: 'tipo_localizacao', nullable: false })
-  location_type: string;
+  location_type: number;
 
   @Column({ name: 'tipo_rede', nullable: false })
-  network_type: string;
+  network_type: number;
 
   @Column({ name: 'municipio_id', nullable: false })
   city_id: number;

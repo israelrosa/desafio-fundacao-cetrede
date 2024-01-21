@@ -6,12 +6,12 @@ import {
   JoinColumn,
   ManyToOne,
   OneToMany,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
 } from 'typeorm';
 
 @Entity({ name: 'municipios' })
 export class City {
-  @PrimaryGeneratedColumn('increment')
+  @PrimaryColumn()
   id: number;
 
   @Column({ name: 'nome', nullable: false })
