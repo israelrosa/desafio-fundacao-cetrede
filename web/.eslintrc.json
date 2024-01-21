@@ -6,7 +6,7 @@
   "extends": [
     "standard-with-typescript",
     "next/core-web-vitals",
-    "eslint:recommended", 
+    "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "airbnb",
@@ -19,15 +19,15 @@
     },
     "sourceType": "module"
   },
-  "plugins": [
-    "react",
-    "react-hooks"
-  ],
+  "plugins": ["react", "react-hooks", "import", "jsx-a11y"],
   "rules": {
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
     "react/react-in-jsx-scope": "off",
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "react/jsx-filename-extension": [
+      1,
+      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+    ],
     "import/extensions": [
       "error",
       "ignorePackages",
