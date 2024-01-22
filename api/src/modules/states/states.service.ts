@@ -31,6 +31,12 @@ export class StatesService {
       });
     }
 
+    if (findAllStatesQueryDto.region) {
+      queryBuilder.andWhere('state.regiao = :region', {
+        region: findAllStatesQueryDto.region,
+      });
+    }
+
     if (findAllStatesQueryDto.sorts) {
       const sorts = findAllStatesQueryDto.sorts.split(',');
       const sortsAndOrders = sorts.map((item) => item.trim().split(':'));
