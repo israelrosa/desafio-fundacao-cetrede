@@ -5,6 +5,9 @@ Desafio para o processo seletivo do projeto FNDE onde o objetivo é extrair algu
 ## Modelagem do banco de dados
 ![Diagrama](./inse-modelagem.png)
 
+## Documentação da API
+- [Documentação Postman](https://www.postman.com/martian-astronaut-427000/workspace/inse-dashboard/request/20554883-5e91c54c-08cd-4e9f-94f8-9d978bac7a2a)
+
 ## Requisitos do Projeto
 
 - [Node.js](https://nodejs.org/) (recomendado v18 ou superior)
