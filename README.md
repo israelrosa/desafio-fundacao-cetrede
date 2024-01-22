@@ -2,6 +2,9 @@
 # Desafio projeto FNDE INSE 2021
 Desafio para o processo seletivo do projeto FNDE onde o objetivo é extrair algumas informações dos dados do INSE 2021 e criar alguns relatórios. Os frameworks e bibliotecas escolhidas foram o Reactjs, Nextjs e Nestjs, para o banco de dados foi escolhido o postgresql.
 
+## Modelagem do banco de dados
+![Diagrama](./inse-modelagem.png)
+
 ## Requisitos do Projeto
 
 - [Node.js](https://nodejs.org/) (v16 ou superior)
