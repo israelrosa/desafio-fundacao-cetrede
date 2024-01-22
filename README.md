@@ -68,7 +68,16 @@ Instale os pacotes utilizando o yarn:
 yarn install # ou somente yarn
 ```
 
-### 2. Rodar o projeto
+### 2. Configurar variáveis de ambiente
+
+As variáveis de ambientes já estão configuradas no .env.example. 
+Código para criar o .env.local:
+
+```bash
+cp .env.example .env.local
+```
+
+### 3. Rodar o projeto
 
 Após instalar os pacotes você poderá iniciar o projeto:
 
