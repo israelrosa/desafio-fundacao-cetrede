@@ -1,11 +1,18 @@
-import { InputText } from "primereact/inputtext";
+import { InputText, type InputTextProps } from "primereact/inputtext";
 import React from "react";
 
-export default function Search(): React.ReactNode {
+export interface SearchProps extends InputTextProps {}
+
+export default function Search({
+  className,
+  ...rest
+}: SearchProps): React.ReactNode {
+  const customClassName = `p-input-icon-left ${className}`;
+
   return (
-    <span className="p-input-icon-left">
+    <span className={customClassName}>
       <i className="pi pi-search" />
-      <InputText placeholder="Keyword Search" />
+      <InputText {...rest} />
     </span>
   );
 }
