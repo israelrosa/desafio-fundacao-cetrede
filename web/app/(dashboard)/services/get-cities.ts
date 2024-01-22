@@ -22,7 +22,7 @@ export default async function getCities(
   });
 
   const response = await fetch(
-    `http://localhost:3001/cities?${queryUrl.toString()}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/cities?${queryUrl.toString()}`,
   );
 
   const cities = await response.json();

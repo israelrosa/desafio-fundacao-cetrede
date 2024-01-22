@@ -27,7 +27,7 @@ export default async function getInseRecords(
   });
 
   const response = await fetch(
-    `http://localhost:3001/inse-records?${queryUrl.toString()}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/inse-records?${queryUrl.toString()}`,
   );
 
   const inseRecords = await response.json();

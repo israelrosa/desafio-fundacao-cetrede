@@ -17,7 +17,7 @@ export default async function getStates(query: StatesQuery): Promise<State[]> {
   });
 
   const response = await fetch(
-    `http://localhost:3001/states?${queryUrl.toString()}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/states?${queryUrl.toString()}`,
   );
 
   const states = await response.json();
