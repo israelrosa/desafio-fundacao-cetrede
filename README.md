@@ -7,7 +7,7 @@ Desafio para o processo seletivo do projeto FNDE onde o objetivo é extrair algu
 
 ## Requisitos do Projeto
 
-- [Node.js](https://nodejs.org/) (v16 ou superior)
+- [Node.js](https://nodejs.org/) (recomendado v18 ou superior)
 - [npm](https://www.npmjs.com/) (v6.x ou superior)
 - [yarn](https://classic.yarnpkg.com/en/docs/install#windows-stable) (v1.22.x ou superior)
 - [Docker](https://docs.docker.com/engine/install/)
