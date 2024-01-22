@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { type InseRecord } from "@/interfaces/inse-records";
 import { type TypeOrmPaginationTemplate } from "@/interfaces/utils/typeormPaginationTemplate";
 import { Responsive, WidthProvider, type Layouts } from "react-grid-layout";
@@ -34,26 +34,25 @@ export default function Home(): React.ReactNode {
     useState<TypeOrmPaginationTemplate<InseRecord>>();
   const [schools, setSchools] = useState<TypeOrmPaginationTemplate<School>>();
 
-  useEffect(() => {
-    (async (): Promise<void> => {
-      const inseRecords = await getInseRecords(queries);
-      setResults(inseRecords);
-    })();
-  }, [queries]);
+  const queriesDebounce = useRef<NodeJS.Timeout | null>(null);
+  const schoolQueriesDebounce = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     (async (): Promise<void> => {
-      const schoolsData = await getSchools({
-        page: schoolQueries.page,
-        limit: schoolQueries.limit,
-        ...queries,
-        ...schoolQueries,
+      await Promise.all([
+        getInseRecords(queries),
+        getSchools({
+          page: schoolQueries.page,
+          limit: schoolQueries.limit,
+          ...queries,
+          ...schoolQueries,
+        }),
+      ]).then(([inseRecords, schoolsData]) => {
+        setResults(inseRecords);
+        setSchools(schoolsData);
       });
-
-      setSchools(schoolsData);
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [schoolQueries, queries]);
+  }, []);
 
   const handleLayoutChange = useCallback(() => {
     setLayout({
@@ -100,10 +99,51 @@ export default function Home(): React.ReactNode {
     });
   }, []);
 
-  const handleQueriesChange = async (
-    queriesData: InseRecordQuery,
+  const handleQueriesChange = useCallback(
+    async (queriesData: InseRecordQuery): Promise<void> => {
+      if (queriesDebounce.current) {
+        clearTimeout(queriesDebounce.current);
+      }
+
+      setQueries(queriesData);
+
+      queriesDebounce.current = setTimeout(async () => {
+        Promise.all([
+          getInseRecords(queriesData),
+          getSchools({
+            page: schoolQueries.page,
+            limit: schoolQueries.limit,
+            ...queriesData,
+            ...schoolQueries,
+          }),
+        ]).then(([inseRecords, schoolsData]) => {
+          setResults(inseRecords);
+          setSchools(schoolsData);
+        });
+      }, 1000);
+    },
+    [schoolQueries],
+  );
+
+  const handleSchoolQueriesChange = async (
+    schoolQueriesData: SchoolQuery,
   ): Promise<void> => {
-    setQueries(queriesData);
+    setSchoolQueries(schoolQueriesData);
+
+    if (schoolQueriesDebounce.current) {
+      clearTimeout(schoolQueriesDebounce.current);
+    }
+
+    schoolQueriesDebounce.current = setTimeout(async () => {
+      getSchools({
+        page: schoolQueries.page,
+        limit: schoolQueries.limit,
+        ...queries,
+        ...schoolQueriesData,
+      }).then((schoolsData) => {
+        setSchools(schoolsData);
+      });
+    }, 1000);
   };
 
   return (
@@ -181,7 +221,7 @@ export default function Home(): React.ReactNode {
             <SchoolsTable
               schools={schools}
               queries={schoolQueries}
-              onChange={setSchoolQueries}
+              onChange={handleSchoolQueriesChange}
             />
           </div>
         </ResponsiveGridLayout>

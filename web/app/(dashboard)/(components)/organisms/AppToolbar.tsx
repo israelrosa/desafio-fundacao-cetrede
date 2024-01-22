@@ -1,7 +1,7 @@
 import Search from "@/components/atoms/Search";
 import { Dropdown } from "primereact/dropdown";
 import { Toolbar } from "primereact/toolbar";
-import React from "react";
+import React, { useRef } from "react";
 import CityDropdown from "../atoms/CityDropdown";
 import StateDropdown from "../atoms/StateDropdown";
 import { type InseRecordQuery } from "../../services/get-inse-records";
@@ -15,6 +15,8 @@ export default function AppToolbar({
   queries,
   onChange,
 }: AppToolbarProps): React.ReactNode {
+  const searchDebounce = useRef<NodeJS.Timeout | null>(null);
+
   const locationTypes = [
     { name: "Urbana", code: 1 },
     { name: "Rural", code: 2 },
@@ -49,13 +51,23 @@ export default function AppToolbar({
     onChange(queriesCopy);
   };
 
+  const handleSearchChange = (event: any): void => {
+    event.preventDefault();
+
+    if (searchDebounce.current) {
+      clearTimeout(searchDebounce.current);
+    }
+
+    searchDebounce.current = setTimeout(() => {
+      const queriesCopy = { ...queries };
+      queriesCopy.search = event.target.value;
+
+      onChange(queriesCopy);
+    }, 500);
+  };
+
   const startContent = (
-    <Search
-      onChange={(e) => {
-        handleQueriesChange(e, "search");
-      }}
-      placeholder="Buscar registros"
-    />
+    <Search onChange={handleSearchChange} placeholder="Buscar registros" />
   );
 
   const endContent = (
