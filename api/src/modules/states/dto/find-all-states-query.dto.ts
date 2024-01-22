@@ -6,16 +6,6 @@ export class FindAllStatesQueryDto {
   @IsOptional()
   search?: string;
 
-  @IsNumber()
-  @IsOptional()
-  @Transform(({ value }) => +value)
-  page?: number;
-
-  @IsNumber()
-  @IsOptional()
-  @Transform(({ value }) => +value)
-  limit?: number;
-
   @IsString()
   @IsOptional()
   sorts?: string;

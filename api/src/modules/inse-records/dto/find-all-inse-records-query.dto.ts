@@ -41,9 +41,15 @@ export class FindAllInseRecordsQueryDto {
 
   @IsNumber()
   @IsOptional()
+  @Transform(({ value }) => +value)
   state_id?: number;
 
   @IsNumber()
   @IsOptional()
+  @Transform(({ value }) => +value)
   city_id?: number;
+
+  @IsString()
+  @IsOptional()
+  region?: string;
 }
