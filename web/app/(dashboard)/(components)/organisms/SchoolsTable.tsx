@@ -118,6 +118,9 @@ export default function SchoolsTable({
         sortMode="multiple"
         multiSortMeta={sortMeta}
         onSort={handleSort}
+        resizableColumns
+        rowHover
+        rowClassName={() => "cursor-pointer active:bg-slate-200"}
         onRowDoubleClick={handleRowClick}
       >
         <Column field="name" header="Escola" sortable />
